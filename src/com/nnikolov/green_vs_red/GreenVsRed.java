@@ -295,4 +295,3 @@ public final class GreenVsRed {
         return targetCellGreenColorChanges;
     }
 }
-//test
