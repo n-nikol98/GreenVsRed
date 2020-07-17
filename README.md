@@ -16,7 +16,7 @@ Some naming conventions and the corresponding terminology:
 
 A description of the Grid generation progression algorithm:
 
-  **NOTE: The neighbours of a Cell also include the ones that are diagonal to it, therefore each Cell can have up to 8 neighbours. **
+>**NOTE: The neighbours of a Cell also include the ones that are diagonal to it, therefore each Cell can have up to 8 neighbours.**
 
       - If a red color Cell is surrounded by 3 or 6 green Cells, it will become green in the next generation.
       - If a red color Cell is surrounded by 1, 2, 4, 5, 7 or 8 green Cells, it will remain red in the next generation.
