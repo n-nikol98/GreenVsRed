@@ -10,6 +10,7 @@ import com.nnikolov.green_vs_red.model.Grid;
 import com.nnikolov.green_vs_red.util.GridGenerationStepper;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Green Vs Red
@@ -62,13 +63,21 @@ import java.util.List;
 public final class GreenVsRed {
 
     /**
+     * Initialise a static context message output String consumer.
+     * For the purposes of the lifetime of this application, this consumer will feed all incoming Strings to the
+     * standard console output function: System.out::println.
+     *
+     * */
+    private final static Consumer<String> messageOutputStringConsumer = System.out::println;
+
+    /**
      * Initialise a static context InputArgumentsReader for the purposes of the lifetime of this application that
      * accepts an InputStream in the form of: System.in and an output String Consumer in the
-     * form of: System.out::println
+     * form of the static context messageOutputStringConsumer.
      *
      * */
     private final static InputArgumentsReader inputArgumentsReader =
-            new InputArgumentsReader(System.in, System.out::println);
+            new InputArgumentsReader(System.in, messageOutputStringConsumer);
 
     public static void main(final String[] args) {
         //Construct an initial Grid from User input.
@@ -93,12 +102,12 @@ public final class GreenVsRed {
                 grid, targetCellCoordinates, targetGridGeneration);
 
         /*
-        * Print out the amount of times a targeted Cell within the cellMatrix of a Grid changes its Color to GREEN
-        * up to the targeted Grid generation (including the first ZERO generation).
+        * Pass the amount of times a targeted Cell within the cellMatrix of a Grid changes its Color to GREEN
+        * up to the targeted Grid generation (including the first ZERO generation) to the message output string
+        * consumer.
         * */
-        System.out.println(
-                getTargetCellGreenColorChangesUpToTargetGenerations(
-                        grid, targetCellCoordinates[0], targetGridGeneration[0]));
+        messageOutputStringConsumer.accept(Long.toString(getTargetCellGreenColorChangesUpToTargetGeneration(
+                grid, targetCellCoordinates[0], targetGridGeneration[0])));
     }
 
     /**
@@ -115,8 +124,8 @@ public final class GreenVsRed {
 
         //Loop until a valid initial-state Grid instance is constructed via User input.
         VariableActionUtil.loopAndOutputErrorMessagesUntilAllActionExceptionsAreCleared.accept(
-                //All Exception message String will be fed to the Consumer: System.out::println
-                System.out::println, () -> {
+                //All Exception message String will be fed to the application standard messageOutputStringConsumer
+                messageOutputStringConsumer, () -> {
                     /*
                      * Obtain a two-element 'short' array that contains the intended Grid cellMatrix axes sizes from
                      * User input.
@@ -182,8 +191,8 @@ public final class GreenVsRed {
             final TargetGridGeneration[] targetGridGeneration) {
         //Loop until valid targetCellCoordinates are provided by the User.
         VariableActionUtil.loopAndOutputErrorMessagesUntilAllActionExceptionsAreCleared.accept(
-                //All Exception message String will be fed to the Consumer: System.out::println
-                System.out::println, () ->
+                //All Exception message String will be fed to the application standard messageOutputStringConsumer.
+                messageOutputStringConsumer, () ->
                 {
                     /*
                      * Obtain a three-element Number array, containing the Grid cellMatrix Cell Generation tracking
@@ -259,7 +268,7 @@ public final class GreenVsRed {
      * GREEN Color, up to the targetGridGeneration (including the ZERO generation).
      *
      * */
-    private static long getTargetCellGreenColorChangesUpToTargetGenerations(final Grid grid,
+    private static long getTargetCellGreenColorChangesUpToTargetGeneration(final Grid grid,
                                                                            final short[] targetCellCoordinates,
                                                                            final TargetGridGeneration targetGridGeneration) {
         /*
