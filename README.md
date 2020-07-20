@@ -1,6 +1,6 @@
 # GreenVsRed
 ## Author: Nedko Nikolov / nnikolov ##
-### Version: 1.0.0 ###
+### Version: 1.0.1 ###
 
 A game that determines how many times a Cell within a Grid, containing a rectangular cell matrix, has a green color over the progression of the different generations of the Grids cell matrix, up to a certain targeted Grid generation.
 
@@ -42,4 +42,4 @@ Expected inputs from an user:
           have its color tracked over N generations.
           
 ---
-**The pre-compiled binary file of version: 1.0.0 can be found [here](https://github.com/n-nikol98/GreenVsRed/releases).**
+**The pre-compiled binary file of version: 1.0.1 can be found [here](https://github.com/n-nikol98/GreenVsRed/releases).**
